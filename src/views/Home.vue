@@ -1,4 +1,5 @@
 <template>
+<h1>Token Seller</h1>
 <Form title="Buy Token" button_value="Buy" />
 </template>
 
