@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-
+import { TokenModule } from './Token'
 export default createStore({
   state: {
   },
@@ -8,5 +8,6 @@ export default createStore({
   actions: {
   },
   modules: {
+    token: TokenModule
   }
 })

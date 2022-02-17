@@ -19,7 +19,7 @@
 
         <button type="submit">Buy</button>
         <span class="buying_error">{{ state.buying_error }}</span>
-        <Token v-bind:token="state.token"/>
+        <Token v-bind:token="state.generated_token"/>
       </div>
     </form>
   </div>
@@ -27,21 +27,21 @@
 
 <script setup>
 import { reactive } from "vue";
-import { users } from "../assets/users";
-import { useRouter } from "vue-router";
+import { tokens } from "../assets/tokens";
+// import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 
 const store = useStore();
 
 const state = reactive({
-  token: "",
+  generated_token: "SD3423SD",
   amount: null,
   meter_number: "",
   buying_error: "",
-  user: users[0],
+  token: tokens[0],
 });
 
-const router = useRouter();
+// const router = useRouter();
 
 function buy() {
   if (state.meter_number.length != 6) {
@@ -49,12 +49,13 @@ function buy() {
   } else if (state.amount % 100 != 0 || state.amount > 182500) {
     state.buying_error = "Invalid amount"
     } else {
-    state.buying_error = "DONE!"
-    state.user.username = state.meter_number;
-    store.commit("user",state.username)
-    state.meter_number = "";
-    state.buying_error = "";
-    router.push({ name: "dashboard" });
+    state.token.amount = state.amount;
+    state.token.meter_number = state.meter_number;
+    store.commit("token",state.token.generated_token)
+    // store.dispatch("token", state.token)
+    // state.meter_number = "";
+    // state.buying_error = "";
+    // router.push({ name: "dashboard" });
   }
 }
 </script>
